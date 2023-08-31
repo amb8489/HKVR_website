@@ -1,6 +1,6 @@
 const { logEvents } = require("./logger");
 
-// error middleware
+// override defulat error middleware
 const errorHandler = (err, req, res, next) => {
   logEvents(
     `${err.name}: ${err.message}\t${req.method}\t${req.url}\t${req.headers.origin}`,
