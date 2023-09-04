@@ -3,8 +3,10 @@ const router = express.Router();
 
 // where functions for get post update delete are
 const notesController = require("../controllers/notesController");
+const verifyJWT = require("../middleware/verifyJWT");
 
-// /notes/
+router.use(verifyJWT);
+
 router
   .route("/")
   .get(notesController.getAllNotes)

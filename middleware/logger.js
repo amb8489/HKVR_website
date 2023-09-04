@@ -6,7 +6,7 @@ const path = require("path");
 
 // writes logs message to logFileName
 const logEvents = async (message, logFileName) => {
-  const dateTime = format(new Date(), "yyyyMMdd\tHH:mm:ss");
+  const dateTime = format(new Date(), "yyyy-MM-dd\tHH:mm:ss");
   const logItem = `${dateTime}\t${uuid()}\t${message}\n`;
 
   try {

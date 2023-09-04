@@ -1,10 +1,10 @@
 const express = require("express");
 const router = express.Router();
-
-// where functions for get post update delete are
 const usersController = require("../controllers/usersController");
+const verifyJWT = require("../middleware/verifyJWT");
 
-//   /user/
+router.use(verifyJWT);
+
 router
   .route("/")
   .get(usersController.getAllUsers)
