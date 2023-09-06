@@ -55,7 +55,7 @@ const login = async (req, res) => {
     sameSite: "None", //cross-site cookie
     maxAge: 7 * 24 * 60 * 60 * 1000, //cookie expiry: set to match refresh token
   });
-  logEvents(`${username} logged in`, "reqLog.log");
+  logEvents(`${username} logged in`, "userActions.log");
 
   // Send accessToken containing username and roles
   res.json({ accessToken });
@@ -114,7 +114,7 @@ const refresh = (req, res) => {
 // @route POST /auth/logout
 // // @access Private - just to clear cookie if exists
 const logout = (req, res) => {
-  logEvents(`${req.user} logged out`, "reqLog.log");
+  logEvents(`${req.user} logged out`, "userActions.log");
 
   // remove jwt cookies
   const cookies = req.cookies;

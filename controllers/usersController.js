@@ -55,7 +55,7 @@ const createNewUser = async (req, res) => {
     //created new user
     logEvents(
       `${req.user} created a new user : ${username} with roles: ${roles}`,
-      "reqLog.log"
+      "userActions.log"
     );
     res.status(201).json({ message: `New user ${username} created` });
   } else {
@@ -119,7 +119,7 @@ const updateUser = async (req, res) => {
 
   logEvents(
     `${req.user} updated user ${prev_username} -> ${username} | ${prev_roles} -> ${roles} | is_active: ${prev_active} -> ${active} | password changed: ${passoword_changed} `,
-    "reqLog.log"
+    "userActions.log"
   );
 
   res.json({ message: `${updatedUser.username} updated` });
@@ -151,7 +151,7 @@ const deleteUser = async (req, res) => {
 
   const result = await user.deleteOne();
 
-  logEvents(`${req.user} deleted user ${result.username}`, "reqLog.log");
+  logEvents(`${req.user} deleted user ${result.username}`, "userActions.log");
 
   const reply = `Username ${result.username} with ID ${result._id} deleted`;
 
