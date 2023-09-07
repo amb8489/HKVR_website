@@ -13,10 +13,17 @@ const userSchema = new mongoose.Schema({
     type: [String],
     default: ["Employee"],
   },
+
   active: {
     type: Boolean,
     default: true,
   },
+  following: [
+    {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "User", // Reference to the User model
+    },
+  ],
 });
 
 module.exports = mongoose.model("User", userSchema);
