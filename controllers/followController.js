@@ -8,13 +8,15 @@ const { logEvents } = require("../middleware/logger");
 // @access Private
 const getFollowing = async (req, res) => {
   try {
-    const { user_id } = req.query;
+    const { user_id } = req.body;
 
     // Does the user exist to update?
     const user = await User.findById(user_id).exec();
 
     if (!user) {
-      return res.status(404).json({ message: "User not found" });
+      return res
+        .status(404)
+        .json({ message: `User with id ${user_id} not found` });
     }
 
     return res.status(200).json({ following: user.following });
@@ -35,6 +37,10 @@ const followNewUser = async (req, res) => {
   // Confirm data
   if (!user_id || !follow_id) {
     return res.status(400).json({ message: "All fields are required" });
+  }
+
+  if (follow_id == user_id) {
+    return res.status(400).json({ message: "you cant follow yourself" });
   }
 
   try {
@@ -75,7 +81,7 @@ const followNewUser = async (req, res) => {
 };
 
 // @desc unfollow a user
-// @route PATCH /follow
+// @route delete /follow
 // @access Private
 const unfollowUser = async (req, res) => {
   const { unfollow_id, user_id } = req.body;
